@@ -28,7 +28,15 @@ fi
 
 echo "Changing ownership of all files in workspace to user group..."
 
-sudo chown -R developer:developer .
+user_name="developer"
+group_name="developer"
+
+development_directory="notebooks"
+user_files="pyproject.toml .cspell.json .gitattributes .gitignore LICENSE README.md"
+
+chown -R "$user_name":"$group_name" "$development_directory" \
+&& chown "$user_name":"$group_name" $user_files
+
 
 if [ $? -eq 0 ]; then
     echo "Success!"
@@ -93,8 +101,6 @@ fi
 # Account configuration
 # =====================
 
-user_name="developer"
-group_name="developer"
 command_line_aliases_file="https://raw.githubusercontent.com/mauro-j-sanchirico/personal-scripts/refs/heads/main/bash_aliases/command_line.bash_aliases"
 git_aliases_file="https://raw.githubusercontent.com/mauro-j-sanchirico/personal-scripts/refs/heads/main/bash_aliases/git.bash_aliases"
 poetry_aliases_file="https://raw.githubusercontent.com/mauro-j-sanchirico/personal-scripts/refs/heads/main/bash_aliases/poetry.bash_aliases"
@@ -141,11 +147,11 @@ echo "export PATH=\"$developer_home/$poetry_dir:\$PATH\"" >> $developer_home/.ba
 
 echo "Configuring Poetry virtual environments..."
 
-"$poetry_command" config virtualenvs.in-project true
+sudo -u "$user_name" "$poetry_command" config virtualenvs.in-project true
 
 echo "Installing repository..."
 
-"$poetry_command" install --with dev --no-root
+sudo -u "$user_name" "$poetry_command" install --with dev
 
 if [ $? -eq 0 ]; then
     echo "Repository dependencies installed!"

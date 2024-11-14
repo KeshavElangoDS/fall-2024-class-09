@@ -112,6 +112,7 @@
         "iloc",
         "imag",
         "imshow",
+        "importances",
         "infty",
         "ipykernel",
         "ipynb",
