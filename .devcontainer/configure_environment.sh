@@ -85,18 +85,6 @@ else
     exit 1
 fi
 
-echo "Installing Git LFS..."
-
-apt-get install git-lfs &&
-git lfs install
-
-if [ $? -eq 0 ]; then
-    echo "Git LFS installed!"
-else
-    echo "Failed to install Git LFS."
-    exit 1
-fi
-
 # =====================
 # Account configuration
 # =====================

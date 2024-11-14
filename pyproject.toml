@@ -17,6 +17,8 @@ scipy = "^1.14.1"
 latex = "^0.7.0"
 scikit-learn = "^1.5.2"
 lime = "^0.2.0.1"
+torch = "^2.5.1"
+torchvision = "^0.20.1"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
